@@ -24,4 +24,5 @@ urlpatterns = [
     path('customer/',include('customers.urls')),
     path('orders/',include('orders.urls'))
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_URL)
+if settings.DEBUG:
+  urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
