@@ -13,7 +13,7 @@
        
         <div class="col-4">
            
-             <a href="{% url 'detail_product' pk=product_id %}"><img src="{{ product.image.url }}"></a>
+             <a href="{% url 'detail_product' product.id %}"><img src="{{ product.image.url }}"></a>
          
             <h4>{{ product.title }}</h4>
             <div class="rating">

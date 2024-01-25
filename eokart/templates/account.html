@@ -11,24 +11,38 @@
           
             </div>
             <div class="col-2">
+                {% if messages %}
+                <div>
+                    {% for message in messages %}
+                       <li>{{ message }}</li>
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <div class="form-container" style="position: relative; top:-250px;left:-100px;">
                     <div class="form-btn">
                         <span onclick="login()">Login</span>
-                        <span onclick="register()">Register</span>
+                        <span onclick="signup()">SignUp</span>
                         <hr id="Indicator">
                     </div>
-                    <form id="LoginForm">
-                        <input type="text" placeholder="Username">
-                        <input type="password" placeholder="Password">
-                        <button type="submit" class="btn">Login</button>
+                    <form id="LoginForm" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="text" required name="username" placeholder="Username">
+                        <input type="password" required name="password" placeholder="Password">
+                        <button type="submit"  name="login" class="btn">Login</button>
                         <a href="">Forget Password</a>
                     </form>
 
-                    <form id="RegForm">
-                        <input type="text" placeholder="Username">
-                        <input type="email" placeholder="Email">
-                        <input type="password" placeholder="Password">
-                        <button type="submit" class="btn">Register</button>
+                    <form id="Signup" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <input type="text" name="username" maxlength="10" minlength="5" required placeholder="Username">
+                        <input type="email" name="email" required  placeholder="Email">
+                        <input type="password" name="password" required minlength="10" placeholder="Password">
+                        <input type="text" name="address"  minlength="10" required placeholder="Address">
+                        <input type="text" name="phonenumber"  minlength="10" required placeholder="Phone Number">
+
+
+                        <button type="submit"  name = "signup_button" class="btn">SignUp</button>
                     </form>
                 </div>
             </div>
@@ -46,16 +60,16 @@
      
 <script>
     var LoginForm = document.getElementById("LoginForm");
-    var RegForm = document.getElementById("RegForm");
+    var Signup = document.getElementById("Signup");
     var Indicator = document.getElementById("Indicator");
-    function register() {
-        RegForm.style.transform = "translatex(0px)";
+    function signup() {
+        Signup.style.transform = "translatex(0px)";
         LoginForm.style.transform = "translatex(0px)";
         Indicator.style.transform = "translateX(100px)";
 
     }
     function login() {
-        RegForm.style.transform = "translatex(300px)";
+        Signup.style.transform = "translatex(300px)";
         LoginForm.style.transform = "translatex(300px)";
         Indicator.style.transform = "translate(0px)";
 
