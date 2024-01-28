@@ -10,39 +10,40 @@
             <img src="/static/images/bestdeal.webp" width="50%" style="position: relative; top:-700px;left:200px;">
           
             </div>
-            <div class="col-2">
+            <div class="col-2" >
+
                 {% if messages %}
-                <div>
+                <div class="message-container"> 
+                 
                     {% for message in messages %}
-                       <li>{{ message }}</li>
+                    
+                        <p class="{{ message.tags }}">{{ message }}</p>
                     {% endfor %}
+
                 </div>
                 {% endif %}
-                <div class="form-container" style="position: relative; top:-250px;left:-100px;">
+                <div class="form-container" style="position: relative; top:-250px;left:-83px;">
                     <div class="form-btn">
                         <span onclick="login()">Login</span>
                         <span onclick="signup()">SignUp</span>
                         <hr id="Indicator">
                     </div>
+                    <form id="Signup" method="post" enctype="multipart/form-data" style="height: fit-content;">
+                        {% csrf_token %}
+                       
+                        <input type="text" name="username" maxlength="10" minlength="5" required placeholder="Username">
+                        <input type="email" name="email" required  placeholder="Email">
+                        <input type="password" name="password" required minlength="10" placeholder="Password">
+                        <input type="text" name="address"  minlength="10" required placeholder="Address">
+                        <input type="text" name="phonenumber"  minlength="10" required placeholder="Phone Number">
+                        <button type="submit"  name = "signup_button" class="btn">SignUp</button>
+                    </form>
                     <form id="LoginForm" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="text" required name="username" placeholder="Username">
                         <input type="password" required name="password" placeholder="Password">
                         <button type="submit"  name="login" class="btn">Login</button>
                         <a href="">Forget Password</a>
-                    </form>
-
-                    <form id="Signup" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-
-                        <input type="text" name="username" maxlength="10" minlength="5" required placeholder="Username">
-                        <input type="email" name="email" required  placeholder="Email">
-                        <input type="password" name="password" required minlength="10" placeholder="Password">
-                        <input type="text" name="address"  minlength="10" required placeholder="Address">
-                        <input type="text" name="phonenumber"  minlength="10" required placeholder="Phone Number">
-
-
-                        <button type="submit"  name = "signup_button" class="btn">SignUp</button>
                     </form>
                 </div>
             </div>
@@ -75,7 +76,15 @@
 
     }
 </script>
-
+{% if signup_button %} 
+     <script>
+        signup_button()
+     </script>
+     {% else %}
+     <script>
+        login()
+     </script>
+    {% endif %} 
     {% endblock %}
 
 {% endblock content %}
