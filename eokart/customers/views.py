@@ -58,7 +58,7 @@ def show_account(request):
 
 
 def sign_out(request):
-    logout(request)
-    return redirect(request,'home')
+   logout(request)
+   return redirect('home')
 
 
